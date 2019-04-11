@@ -28,7 +28,7 @@ function findByCompany() {
     //当页没匹配就翻页
     if (!flag) {
         console.log('该页没有找到"' + company + '" (' + window.location.search.substr(window.location.search.indexOf('page=')) + ')，将翻页');
-        if($('.p_in .bk a').size() > 1) {
+        if($('.p_in .bk a').size() > 1 || $('.p_in .bk a:last').text() == '下一页') {
             //不想再输入公司名，所以地址加上参数company。用encodeURIComponent编码，否则取出会乱码
             $('.p_in .bk a:last')[0].href += '&company=' + encodeURIComponent(company); 
             $('.p_in .bk a:last')[0].click();
@@ -69,7 +69,7 @@ function saveApplies() {
     var url = new URL(window.location.href);
     console.log('当前页 %s 申请信息保存完毕', url.searchParams.get("page"));
     //翻页
-    if($('.p_in .bk a').size() > 1) {
+    if($('.p_in .bk a').size() > 1 || $('.p_in .bk a:last').text() == '下一页') {
         $('.p_in .bk a:last')[0].click();
     } else {
         console.warn('当前已经是最后一页了！');
